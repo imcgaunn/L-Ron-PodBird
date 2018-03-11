@@ -62,7 +62,7 @@ const SearchBar = (props) => {
     };
     return (
         <div className="podcastSearchBar">
-            <div className="searchDonut">
+            <div className="searchIcon">
                 <img src={searchIcon} alt='gross'/>
             </div>
             <input type="text"
