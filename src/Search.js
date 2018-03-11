@@ -1,7 +1,6 @@
 import React from 'react';
 import './Search.css';
-import {appTitle} from './App.js';
-import cover from './images/HollywoodHandbookCover.jpg';
+import searchIcon from './images/SearchIcon.svg';
 
 import { connect } from 'react-redux';
 
@@ -33,12 +32,19 @@ const searchFocusChanged = (focused) => {
 const searchKeyPressed = (event) => {
     console.dir(event.keyCode);
     switch(event.keyCode) {
-        case 13: return {type: SEARCH_SUBMITTED, payload: {search: event.target}};
-        default: return {type: SEARCH_KEY_PRESSED, payload: {search: event.target}};
+        case 13: return {
+            type: SEARCH_SUBMITTED,
+            payload: {search: event.target}
+        };
+        default: return {
+            type: SEARCH_KEY_PRESSED,
+            payload: {search: event.target}
+        };
     }
 };
 
 const searchFocusReducer = (state = false, action) => {
+    console.log('is this log ever seen??');
     switch(action.type) {
         case SEARCH_SUBMITTED:
             break;
@@ -57,6 +63,7 @@ const SearchBar = (props) => {
     return (
         <div className="podcastSearchBar">
             <div className="searchDonut">
+                <img src={searchIcon} alt='gross'/>
             </div>
             <input type="text"
                    onFocus={props.onSearchFocusChanged}
@@ -66,5 +73,5 @@ const SearchBar = (props) => {
     );
 };
 
-export {SearchBar, searchFocusReducer};
+export {searchFocusReducer};
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

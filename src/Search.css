@@ -1,5 +1,4 @@
 .podcastSearchBar {
-    margin-left: 0.1rem;
     margin-right: 0.2rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -11,29 +10,21 @@
     box-shadow: 0.0rem 0.0rem 0.0rem rgba(216, 161, 208, 0.8);
     font-size: 1.6rem;
     width: 90%;
+    font-family: "Helvetica Neue", sans-serif;
     background: none;
     outline: none;
     border: none;
-    color: #313131;
+    border-bottom: 1px solid slategrey;
 }
 
-.podcastSearchBar input:focus {
-    /* TODO: trigger searchDonutFocused when podcastSearchBar focused */
-}
-
-.searchDonutFocused {
-}
-
-.searchDonut {
-    float: left;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    background-color: #7983ff;
-    border-color: #7983ff;
-    border-radius: 100%;
-    margin-right: 0.5rem;
-    width: 2rem;
+.searchDonut img {
+    float: right;
     height: 2rem;
-    animation: Search-cursor-blink 1.0s linear infinite;
+    width: 3rem;
+}
+
+.searchDonut img:hover {
+    filter: drop-shadow(0px 0px 8px whitesmoke);
 }
 
 .podcastSearchResult {
@@ -45,11 +36,20 @@
     width: 10rem;
 }
 
-@keyframes Search-cursor-blink {
+@keyframes blink {
     0%, 100% {
         opacity: 0;
     }
     35% {
         opacity: 1;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 0.5rem rgba(216, 161, 208, 0.8);
+    }
+    50% {
+        box-shadow: none;
     }
 }
