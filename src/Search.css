@@ -1,5 +1,5 @@
 .podcastSearchBar {
-    margin-left: 0.2rem;
+    margin-left: 0.1rem;
     margin-right: 0.2rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -22,20 +22,18 @@
 }
 
 .searchDonutFocused {
-    animation: Search-cursor-blink 1.2s linear infinite;
 }
 
 .searchDonut {
-    display: inline-block;
+    float: left;
     border: 2px solid rgba(0, 0, 0, 0.1);
-    border-top-color: transparent;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-    border-right-color: #7983ff;
-    border-radius: 2%;
+    background-color: #7983ff;
+    border-color: #7983ff;
+    border-radius: 100%;
     margin-right: 0.5rem;
-    width: 30px;
-    height: 30px;
+    width: 2rem;
+    height: 2rem;
+    animation: Search-cursor-blink 1.0s linear infinite;
 }
 
 .podcastSearchResult {
@@ -51,7 +49,7 @@
     0%, 100% {
         opacity: 0;
     }
-    50% {
+    35% {
         opacity: 1;
     }
 }
