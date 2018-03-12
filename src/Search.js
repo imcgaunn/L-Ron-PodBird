@@ -1,8 +1,7 @@
 import React from 'react';
-import './Search.css';
-import searchIcon from './images/SearchIcon.svg';
-
 import { connect } from 'react-redux';
+import searchIcon from './images/SearchIcon.svg';
+import './Search.css'; // webpack needs this.
 
 import {
     SEARCH_FOCUS_CHANGED,
@@ -10,12 +9,7 @@ import {
     SEARCH_SUBMITTED
 } from "./actions";
 
-const mapStateToProps = (state) => {
-    return {
-        searchActive: state.searchActive
-    };
-};
-
+// ## Action Creators
 const searchFocusChanged = (event) => {
     return {
         type: SEARCH_FOCUS_CHANGED,
@@ -24,7 +18,6 @@ const searchFocusChanged = (event) => {
 };
 
 const searchKeyPressed = (event) => {
-    console.dir(event.target);
     switch(event.keyCode) {
         case 13: return {
             type: SEARCH_SUBMITTED,
@@ -37,6 +30,7 @@ const searchKeyPressed = (event) => {
     }
 };
 
+// ## Reducers
 const searchFocusReducer = (state = false, action) => {
     switch(action.type) {
         case SEARCH_FOCUS_CHANGED:
@@ -56,13 +50,7 @@ const searchKeyPressedReducer = (state = null, action) => {
     return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        searchFocusChanged: event => dispatch(searchFocusChanged(event)),
-        searchKeyPressed: event => dispatch(searchKeyPressed(event))
-    };
-};
-
+// ## Components
 const SearchBar = (props) => {
     const searchActiveString = (active) => {
         return active ? 'searchActive' : 'searchNotActive';
@@ -78,6 +66,20 @@ const SearchBar = (props) => {
                    className={searchActiveString(props.searchActive)}/>
         </div>
     );
+};
+
+// ## Redux Glue
+const mapDispatchToProps = (dispatch) => {
+    return {
+        searchFocusChanged: event => dispatch(searchFocusChanged(event)),
+        searchKeyPressed: event => dispatch(searchKeyPressed(event))
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+        searchActive: state.searchActive
+    };
 };
 
 export {searchFocusReducer, searchKeyPressedReducer};

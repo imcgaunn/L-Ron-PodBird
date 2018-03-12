@@ -11,9 +11,9 @@ import registerServiceWorker from './registerServiceWorker';
 const rootReducer = combineReducers({
     searchFocusReducer,
     searchKeyPressedReducer
-}, applyMiddleware(logger));
+});
 
-let store = createStore(rootReducer);
+let store = createStore(rootReducer, applyMiddleware(logger));
 
 ReactDOM.render(
     <Provider store={store}>
