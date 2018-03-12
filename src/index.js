@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {combineReducers, createStore} from 'redux';
+import {combineReducers, createStore, applyMiddleware} from 'redux';
+import logger from 'redux-logger';
 import './index.css';
 import App from './App';
-import {searchFocusReducer} from "./Search";
+import {searchFocusReducer, searchKeyPressedReducer} from "./Search";
 import registerServiceWorker from './registerServiceWorker';
 
-const initialState = {searchActive: false}
-const rootReducer = combineReducers({searchActive: searchFocusReducer});
+const rootReducer = combineReducers({
+    searchFocusReducer,
+    searchKeyPressedReducer
+}, applyMiddleware(logger));
 
-let store = createStore(rootReducer, initialState);
+let store = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={store}>

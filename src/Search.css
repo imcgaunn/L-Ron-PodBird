@@ -25,26 +25,9 @@
     width: 3rem;
     bottom: 0;
     right: 0;
+    filter: hue-rotate(90deg);
 }
 
 .searchIcon img:hover {
-    filter: drop-shadow(0px 1px 2px gold);
-}
-
-@keyframes blink {
-    0%, 100% {
-        opacity: 0;
-    }
-    35% {
-        opacity: 1;
-    }
-}
-
-@keyframes glow {
-    0%, 100% {
-        box-shadow: 0 0 0.5rem rgba(216, 161, 208, 0.8);
-    }
-    50% {
-        box-shadow: none;
-    }
+    filter: drop-shadow(0px 1px 2px slateblue);
 }

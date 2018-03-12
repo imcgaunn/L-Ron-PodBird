@@ -4,9 +4,11 @@ import searchIcon from './images/SearchIcon.svg';
 
 import { connect } from 'react-redux';
 
-const SEARCH_FOCUS_CHANGED = 'SEARCH FOCUS CHANGED';
-const SEARCH_SUBMITTED = 'SEARCH SUBMITTED';
-const SEARCH_KEY_PRESSED = 'SEARCH KEY PRESSED';
+import {
+    SEARCH_FOCUS_CHANGED,
+    SEARCH_KEY_PRESSED,
+    SEARCH_SUBMITTED
+} from "./actions";
 
 const mapStateToProps = (state) => {
     return {
@@ -14,23 +16,15 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onSearchFocusChanged: searchFocusChanged,
-        onSearchSubmitted: searchKeyPressed
-    };
-};
-
-const searchFocusChanged = (focused) => {
-    console.dir('this is being called!!!');
+const searchFocusChanged = (event) => {
     return {
         type: SEARCH_FOCUS_CHANGED,
-        payload: {focused: focused}
+        payload: {focused: event}
     };
 };
 
 const searchKeyPressed = (event) => {
-    console.dir(event.keyCode);
+    console.dir(event.target);
     switch(event.keyCode) {
         case 13: return {
             type: SEARCH_SUBMITTED,
@@ -44,16 +38,29 @@ const searchKeyPressed = (event) => {
 };
 
 const searchFocusReducer = (state = false, action) => {
-    console.log('is this log ever seen??');
     switch(action.type) {
-        case SEARCH_SUBMITTED:
-            break;
-        case SEARCH_KEY_PRESSED:
-            break;
         case SEARCH_FOCUS_CHANGED:
+            break;
+        default:
             break;
     }
     return state;
+};
+
+const searchKeyPressedReducer = (state = null, action) => {
+    switch(action.type) {
+        case SEARCH_KEY_PRESSED:
+            break;
+        default: break;
+    }
+    return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        searchFocusChanged: event => dispatch(searchFocusChanged(event)),
+        searchKeyPressed: event => dispatch(searchKeyPressed(event))
+    };
 };
 
 const SearchBar = (props) => {
@@ -66,12 +73,12 @@ const SearchBar = (props) => {
                 <img src={searchIcon} alt='gross'/>
             </div>
             <input type="text"
-                   onFocus={props.onSearchFocusChanged}
-                   onKeyDown={props.onSearchSubmitted}
+                   onFocus={props.searchFocusChanged}
+                   onKeyDown={props.searchKeyPressed}
                    className={searchActiveString(props.searchActive)}/>
         </div>
     );
 };
 
-export {searchFocusReducer};
+export {searchFocusReducer, searchKeyPressedReducer};
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
