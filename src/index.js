@@ -5,15 +5,24 @@ import {combineReducers, createStore, applyMiddleware} from 'redux';
 import logger from 'redux-logger';
 import './index.css';
 import App from './App';
-import {searchFocusReducer, searchKeyPressedReducer} from "./Search";
+import {searchReducer} from "./Search";
 import registerServiceWorker from './registerServiceWorker';
 
+const initialState = {
+    search: {},
+    app: {title: 'L Ron PodBird'}
+};
+
+const titleReducer = (state = {title: initialState.app.title}, action) => {
+    return state;
+};
+
 const rootReducer = combineReducers({
-    searchFocusReducer,
-    searchKeyPressedReducer
+    search: searchReducer,
+    app: titleReducer
 });
 
-let store = createStore(rootReducer, applyMiddleware(logger));
+let store = createStore(rootReducer, initialState, applyMiddleware(logger));
 
 ReactDOM.render(
     <Provider store={store}>
