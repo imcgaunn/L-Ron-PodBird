@@ -1,20 +1,23 @@
 import React from 'react';
-import {SearchBar, SearchResult} from "./Search";
+import {connect} from 'react-redux';
+import Search from "./Search";
 import './App.css';
-
-const appTitle = "LronPodManz";
 
 const App = (props) => {
     return (
         <div className="App">
             <header className="App-header">
-                <h1 className="App-title">Welcome to {appTitle}</h1>
+                <h1 className="App-title">Welcome to {props.appTitle}</h1>
             </header>
-            <SearchBar/>
-            <SearchResult/>
+            <Search/>
         </div>
     );
 };
 
-export default App;
-export { appTitle };
+const mapStateToProps = (state) => {
+    return {
+        appTitle: state.app.title
+    };
+};
+
+export default connect(mapStateToProps)(App);
